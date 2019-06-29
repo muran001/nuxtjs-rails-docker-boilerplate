@@ -1,0 +1,45 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - data-sync:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    container_name: db
+  frontend:
+    build: ./frontend
+    tty: true
+    stdin_open: true
+    working_dir: ${DEST_PATH}/frontend
+    volumes:
+      - frontend-sync:${DEST_PATH}/frontend:nocopy
+    ports:
+      - "4000:4000"
+    container_name: ${APP_NAME}_frontend
+  backend:
+    build: ./backend
+    tty: true
+    stdin_open: true
+    working_dir: ${DEST_PATH}/backend
+    command: bash -c "bundle install --path vendor/bundle && bundle exec rails s -b '0.0.0.0'"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - backend-sync:${DEST_PATH}/backend:nocopy
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    container_name: ${APP_NAME}_backend
+volumes:
+  frontend-sync:
+    external: true
+  backend-sync:
+    external: true
+  data-sync:
+    external: true

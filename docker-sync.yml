@@ -1,0 +1,14 @@
+version: "2"
+
+options:
+  verbose: true
+syncs:
+  frontend-sync:
+    src: '${FRONTEND_PATH}'
+    sync_strategy: 'unison'
+  backend-sync:
+    src: '${BACKEND_PATH}'
+    sync_strategy: 'unison'
+  data-sync:
+    src: '${DATA_PATH}'
+    sync_strategy: 'unison'

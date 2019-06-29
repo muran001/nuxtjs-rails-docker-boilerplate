@@ -1,0 +1,8 @@
+.docker-sync/
+.env
+
+backend/vendor/
+backend/log/
+backend/tmp/
+
+db/mysql-data/
