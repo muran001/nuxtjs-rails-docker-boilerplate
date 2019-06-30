@@ -1,4 +1,4 @@
-# template-nuxtjs-rails_api-mysql
+# nuxtjs-rails-docker-boilerplate
 
 This repository contains file for building docker containers for a web application.
 
