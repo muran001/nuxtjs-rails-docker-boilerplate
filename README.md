@@ -15,9 +15,8 @@ $ cp .env.sample .env
 
 $ docker-sync start
 
-$ docker-compose up -d --build
+$ docker-compose up
 
-$ docker-compose exec web bundle install --path vendor/bundle
 
-$ docker-compose exec web bundle exec rails s -b 0.0.0.0 -p 4000
+$ open http://localhost:4000/
 ```
