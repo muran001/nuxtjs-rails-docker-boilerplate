@@ -15,7 +15,7 @@ services:
     tty: true
     stdin_open: true
     working_dir: ${DEST_PATH}/frontend
-    command: bash -c "yarn && npm run dev"
+    command: bash -c "npm install && npm run dev"
     volumes:
       - frontend-sync:${DEST_PATH}/frontend:nocopy
     ports:
